@@ -1,0 +1,97 @@
+<main>
+  <form>
+    <section class="form-fields">
+      <div class="input-group">
+        <label>Nome</label>
+        <input type="text" name="nome" [(ngModel)]="name" placeholder="Nome" />
+      </div>
+      <div class="input-group">
+        <label>CPF</label>
+        <input type="text" name="cpf" [(ngModel)]="cpf" placeholder="cpf" />
+      </div>
+      <div *ngIf="formErrors.cpf" class="error">{{ formErrors.cpf }}</div>
+      <div class="input-group">
+        <label>Data de Nascimento</label>
+        <input
+          type="date"
+          name="data_de_nasc"
+          [(ngModel)]="birth_date"
+          placeholder="data_de_nasc"
+        />
+      </div>
+      <div *ngIf="formErrors.bith_date" class="error">
+        {{ formErrors.bith_date }}
+      </div>
+      <div class="input-group">
+        <label>Gênero</label>
+        <select name="gender" [(ngModel)]="gender">
+          <option value="M">Masculino</option>
+          <option value="F">Feminino</option>
+        </select>
+      </div>
+      <div *ngIf="formErrors.gender" class="error">{{ formErrors.gender }}</div>
+      <div class="input-group">
+        <label>Altura</label>
+        <input
+          type="number"
+          name="altura"
+          [(ngModel)]="height"
+          placeholder="altura"
+        />
+      </div>
+      <div *ngIf="formErrors.height" class="error">{{ formErrors.height }}</div>
+      <div class="input-group">
+        <label>Peso</label>
+        <input
+          type="number"
+          name="peso"
+          [(ngModel)]="weight"
+          placeholder="peso"
+        />
+      </div>
+      <div *ngIf="formErrors.weight" class="error">{{ formErrors.weight }}</div>
+    </section>
+    <button (click)="buttonClick()">{{ id ? "Salvar" : "Criar" }}</button>
+  </form>
+  <section class="table-wrapper">
+    <table>
+      <thead>
+        <th>Nome</th>
+        <th>Gênero</th>
+        <th>CPF</th>
+        <th>Data Nasc.</th>
+        <th>Altura</th>
+        <th>Peso</th>
+        <th>Peso Ideal</th>
+        <th>Situação</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dado of data$ | async">
+          <td>{{ dado.name }}</td>
+          <td>{{ dado.gender }}</td>
+          <td>{{ dado.cpf }}</td>
+          <td>{{ dado.birth_date }}</td>
+          <td>{{ dado.height }}</td>
+          <td>{{ dado.weight }}</td>
+          <td>{{ dado.ideal_weight }}</td>
+          <td>
+            <ng-container *ngIf="dado.situation === 'abaixo_do_peso'">
+              Abaixo do Peso
+            </ng-container>
+            <ng-container *ngIf="dado.situation === 'peso_ideal'">
+              Peso Ideal
+            </ng-container>
+            <ng-container *ngIf="dado.situation === 'acima_do_peso'">
+              Acima do Peso
+            </ng-container>
+          </td>
+          <td>
+            <button (click)="preencherCampos(dado)">Editar</button>
+            <button (click)="removerPessoa(dado.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
