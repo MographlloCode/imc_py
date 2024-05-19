@@ -92,8 +92,5 @@ project_root/
 8. **Acesse a aplicação**:
    `http://localhost:4200`
 
-## Contatos
-
-- Gustavo Mello
-- Email: [Envie um email](!mailto:contact@gmello.tech)
-- LinkedIn: [Acesse aqui](!https://www.linkedin.com/in/mographllo)
+## Criado Por
+Gustavo "Mographllo" Mello
